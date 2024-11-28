@@ -1,0 +1,15 @@
+kubectl create namespace wikijs
+
+kubectl apply -f .\postgres-db.yaml 
+kubectl apply -f .\postgres-svc.yaml 
+kubectl apply -f .\wikijs-db.yaml 
+kubectl apply -f .\wikijs-svc.yaml 
+kubectl apply -f .\wikijs-ingress.yaml 
+
+kubectl port-forward svc/wikijs-db 8080:80
+
+kubectl delete -f .\postgres-db.yaml 
+kubectl delete -f .\postgres-svc.yaml 
+kubectl delete -f .\wikijs-db.yaml 
+kubectl delete -f .\wikijs-svc.yaml 
+kubectl delete -f .\wikijs-ingress.yaml 

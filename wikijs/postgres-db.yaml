@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-db
+  labels:
+    app: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        env:
+          - name: POSTGRES_DB
+            value: "wiki"
+          - name: POSTGRES_USER
+            value: "wikijs"
+          - name: POSTGRES_PASSWORD
+            value: "wikijsrocks"
+        ports:
+          - containerPort: 5432
+        resources: 
+          requests: 
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
